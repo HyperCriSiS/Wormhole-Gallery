@@ -5,7 +5,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TAGS = {tag for group in json.loads((ROOT / "tools" / "tags.json").read_text()).values() for tag in group}
+GROUPS = json.loads((ROOT / "tools" / "tags.json").read_text())
+TAGS = {tag for group in GROUPS.values() for tag in group}
 HEX = re.compile(r"^#[0-9a-f]{6}$")
 ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 RELEASE = re.compile(r"^batch-\d{3}$")
@@ -24,6 +25,10 @@ for entry in index:
     seen.add(set_id)
     if not entry.get("title"):
         errors.append(f"{set_id}: title is missing")
+    if entry.get("category") not in GROUPS["category"]:
+        errors.append(f"{set_id}: unknown category")
+    if entry.get("style") not in GROUPS["style"] or entry["style"] not in entry.get("tags", []):
+        errors.append(f"{set_id}: style must be one of its style tags")
     if not RELEASE.match(entry.get("release", "")):
         errors.append(f"{set_id}: release must look like batch-001")
     unknown = [t for t in entry.get("tags", []) if t not in TAGS]

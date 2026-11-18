@@ -3,6 +3,8 @@
   "schema": 1,
   "id": "caravan-under-the-milky-way",
   "title": "Caravan Under the Milky Way",
+  "category": "space",
+  "style": "painterly",
   "release": "batch-001",
   "tags": [
    "calm",
@@ -27,6 +29,8 @@
   "schema": 1,
   "id": "dj-on-a-tropical-beach",
   "title": "DJ on a Tropical Beach",
+  "category": "landscapes",
+  "style": "painterly",
   "release": "batch-001",
   "tags": [
    "beach",
@@ -52,6 +56,8 @@
   "schema": 1,
   "id": "manta-in-sunlight",
   "title": "Manta in Sunlight",
+  "category": "animals",
+  "style": "painterly",
   "release": "batch-001",
   "tags": [
    "animals",
@@ -77,6 +83,8 @@
   "schema": 1,
   "id": "pine-forest-in-morning-fog",
   "title": "Pine Forest in Morning Fog",
+  "category": "landscapes",
+  "style": "painterly",
   "release": "batch-001",
   "tags": [
    "calm",
@@ -101,6 +109,8 @@
   "schema": 1,
   "id": "storm-over-the-sea",
   "title": "Storm Over the Sea",
+  "category": "space",
+  "style": "painterly",
   "release": "batch-001",
   "tags": [
    "clouds",
