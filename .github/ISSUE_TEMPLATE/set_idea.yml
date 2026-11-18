@@ -1,0 +1,11 @@
+name: Set idea
+description: Suggest a motif or category for new sets.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Motif or category
+      description: What you would like to see, dark or light.
+    validations:
+      required: true

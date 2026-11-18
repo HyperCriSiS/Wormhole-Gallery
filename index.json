@@ -1,0 +1,124 @@
+[
+ {
+  "schema": 1,
+  "id": "caravan-under-the-milky-way",
+  "title": "Caravan Under the Milky Way",
+  "release": "batch-001",
+  "tags": [
+   "calm",
+   "dark",
+   "desert",
+   "epic",
+   "galaxy",
+   "night",
+   "orange",
+   "painterly",
+   "purple",
+   "sky"
+  ],
+  "colors": {
+   "bottom": "#0e0d19",
+   "menu": "#0b1229",
+   "accent": "#ff9d4c"
+  },
+  "preview": "previews/caravan-under-the-milky-way.jpg"
+ },
+ {
+  "schema": 1,
+  "id": "dj-on-a-tropical-beach",
+  "title": "DJ on a Tropical Beach",
+  "release": "batch-001",
+  "tags": [
+   "beach",
+   "dark",
+   "dusk",
+   "energetic",
+   "island",
+   "ocean",
+   "orange",
+   "painterly",
+   "summer",
+   "sunset",
+   "teal"
+  ],
+  "colors": {
+   "bottom": "#020c20",
+   "menu": "#000c22",
+   "accent": "#3fe8f3"
+  },
+  "preview": "previews/dj-on-a-tropical-beach.jpg"
+ },
+ {
+  "schema": 1,
+  "id": "manta-in-sunlight",
+  "title": "Manta in Sunlight",
+  "release": "batch-001",
+  "tags": [
+   "animals",
+   "blue",
+   "calm",
+   "dark",
+   "day",
+   "dreamy",
+   "fish",
+   "ocean",
+   "painterly",
+   "teal",
+   "underwater"
+  ],
+  "colors": {
+   "bottom": "#010f27",
+   "menu": "#02183c",
+   "accent": "#59e5d6"
+  },
+  "preview": "previews/manta-in-sunlight.jpg"
+ },
+ {
+  "schema": 1,
+  "id": "pine-forest-in-morning-fog",
+  "title": "Pine Forest in Morning Fog",
+  "release": "batch-001",
+  "tags": [
+   "calm",
+   "dark",
+   "dawn",
+   "fog",
+   "forest",
+   "gold",
+   "green",
+   "mysterious",
+   "nature",
+   "painterly"
+  ],
+  "colors": {
+   "bottom": "#050a03",
+   "menu": "#25352e",
+   "accent": "#fecf6b"
+  },
+  "preview": "previews/pine-forest-in-morning-fog.jpg"
+ },
+ {
+  "schema": 1,
+  "id": "storm-over-the-sea",
+  "title": "Storm Over the Sea",
+  "release": "batch-001",
+  "tags": [
+   "clouds",
+   "dark",
+   "dramatic",
+   "epic",
+   "night",
+   "ocean",
+   "painterly",
+   "purple",
+   "storm",
+   "violet"
+  ],
+  "colors": {
+   "bottom": "#080b16",
+   "menu": "#0f132a",
+   "accent": "#e89bfd"
+  },
+  "preview": "previews/storm-over-the-sea.jpg"
+ }
+]

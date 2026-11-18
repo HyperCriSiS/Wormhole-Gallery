@@ -1,0 +1,11 @@
+{
+  "subject": ["space", "galaxy", "nebula", "planet", "sky", "aurora", "ocean", "beach", "coast", "underwater", "lake", "river", "waterfall", "island", "mountains", "forest", "jungle", "desert", "canyon", "volcano", "snow", "ice", "meadow", "garden", "flowers", "countryside", "city", "skyline", "street", "village", "castle", "temple", "ruins", "bridge", "lighthouse", "cabin", "library", "spaceship", "station", "megastructure", "train", "ship", "airship", "animals", "cat", "fox", "wolf", "deer", "bird", "fish", "whale", "dragon", "creature", "abstract", "texture", "gradient", "geometric"],
+  "genre": ["nature", "fantasy", "surreal", "sci-fi", "cyberpunk", "post-apocalyptic", "synthwave", "steampunk", "gothic", "cozy", "dark-academia", "japan", "minimal", "y2k"],
+  "time": ["dawn", "day", "golden-hour", "sunset", "dusk", "night"],
+  "weather": ["clear", "clouds", "storm", "rain", "fog", "snowfall"],
+  "season": ["spring", "summer", "autumn", "winter"],
+  "mood": ["calm", "mysterious", "cozy", "epic", "dramatic", "dreamy", "melancholic", "energetic"],
+  "color": ["blue", "teal", "cyan", "green", "yellow", "gold", "orange", "red", "pink", "purple", "violet", "brown", "gray", "monochrome", "warm", "cool"],
+  "style": ["painterly", "realistic", "anime", "watercolor", "pixel-art", "low-poly", "retro", "neon"],
+  "brightness": ["dark", "light"]
+}

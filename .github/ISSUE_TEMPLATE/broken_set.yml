@@ -1,0 +1,18 @@
+name: Broken set
+description: A set looks wrong or does not load.
+labels: [bug]
+body:
+  - type: input
+    id: set
+    attributes:
+      label: Set ID
+      description: The id shown in the gallery, for example aurora-over-fjord.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong?
+      description: What you see, in which browser (Firefox or Waterfox, and the Waterfox style), with or without a sidebar.
+    validations:
+      required: true
