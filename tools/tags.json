@@ -6,6 +6,6 @@
   "season": ["spring", "summer", "autumn", "winter"],
   "mood": ["calm", "mysterious", "cozy", "epic", "dramatic", "dreamy", "melancholic", "energetic"],
   "color": ["blue", "teal", "cyan", "green", "yellow", "gold", "orange", "red", "pink", "purple", "violet", "brown", "gray", "monochrome", "warm", "cool"],
-  "style": ["painterly", "realistic", "anime", "watercolor", "pixel-art", "low-poly", "retro", "neon"],
+  "style": ["photorealistic", "cinematic", "painterly", "concept-art", "oil-painting", "watercolor", "anime", "woodblock", "low-poly", "pixel-art", "flat", "neon", "retro", "realistic"],
   "brightness": ["dark", "light"]
 }
