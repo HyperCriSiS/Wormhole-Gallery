@@ -5,6 +5,9 @@
   are release assets (`batch-NNN`), never committed. `inbox/` and `out/` are ignored.
 - A set id never changes once published: the add-on builds download links from
   `release` and `id`. Fix a broken image by uploading it again with `--clobber`.
+- The production prompt for new sets is internal: it lives in `inbox/PROMPT.md`
+  only and is never committed. Keep other internal notes out of this public
+  repository too.
 - Tags come only from `tools/tags.json`. Adding a tag means editing that file.
 
 ## README style
