@@ -48,6 +48,8 @@ Each entry in [index.json](index.json) describes one set:
 |---|---|
 | `id` | Stable name; the image files are `<id>-header.jpg` and `<id>-wallpaper.jpg` |
 | `title` | Display name |
+| `category` | One of the categories in [tools/tags.json](tools/tags.json), for example `sci-fi` |
+| `style` | The set's style tag, for example `photorealistic` |
 | `release` | Release that holds the images, for example `batch-001` |
 | `tags` | Tags from [tools/tags.json](tools/tags.json), including `dark` or `light` |
 | `colors` | `bottom`, `menu` and `accent` for the Wormhole settings |
@@ -56,7 +58,7 @@ Each entry in [index.json](index.json) describes one set:
 ## 🛠️ Adding sets
 
 New pictures go to `inbox/batch-NNN/` (ignored by git), one image and one JSON
-file per set with `schema`, `id`, `title`, `tags` and `colors`. Then:
+file per set with `schema`, `id`, `title`, `category`, `tags` and `colors`. Then:
 
 ```bash
 python tools/pipeline.py inbox/batch-002 --batch batch-002 --upscaler path/to/realesrgan-ncnn-vulkan.exe --upload

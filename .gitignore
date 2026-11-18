@@ -2,3 +2,4 @@ inbox/
 out/
 __pycache__/
 PROMPT*.md
+.local/

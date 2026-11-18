@@ -1,7 +1,7 @@
 """Turn a folder of master images plus metadata into gallery sets.
 
 Each set in the input folder is one image (PNG, JPEG or WebP) and a JSON file
-with the same name (schema, id, title, tags, colors). For every set the
+with the same name (schema, id, title, category, tags, colors). For every set the
 script upscales the image to 3840 px, checks the safe areas, cuts the header
 (top strip) and the wallpaper (the rest), writes a preview, and adds the set to
 index.json. With --upload the full images go to the GitHub release named by
@@ -25,7 +25,8 @@ from PIL import Image, ImageFilter, ImageStat
 ROOT = Path(__file__).resolve().parent.parent
 WIDTH = 3840
 HEADER_HEIGHT = WIDTH // 12  # the add-on cuts the same 12:1 strip
-TAGS = {tag for group in json.loads((ROOT / "tools" / "tags.json").read_text()).values() for tag in group}
+GROUPS = json.loads((ROOT / "tools" / "tags.json").read_text())
+TAGS = {tag for group in GROUPS.values() for tag in group}
 HEX = re.compile(r"^#[0-9a-f]{6}$")
 ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
@@ -48,6 +49,10 @@ def check_meta(meta, known_ids):
     unknown = [t for t in meta.get("tags", []) if t not in TAGS]
     if unknown:
         errors.append("unknown tags: " + ", ".join(unknown))
+    if meta.get("category") not in GROUPS["category"]:
+        errors.append("category must be one of " + ", ".join(GROUPS["category"]))
+    if len([t for t in meta.get("tags", []) if t in GROUPS["style"]]) != 1:
+        errors.append("use exactly one style tag")
     if not 5 <= len(meta.get("tags", [])) <= 14:
         errors.append("use 5 to 14 tags")
     colors = meta.get("colors", {})
@@ -64,8 +69,11 @@ def upscale(path, upscaler):
             source, target = Path(tmp) / "in.png", Path(tmp) / "out.png"
             image.save(source)
             exe = Path(upscaler)
+            # Small tiles and one thread keep the GPU load low and even; the
+            # default large tiles made an older graphics card whine audibly.
             subprocess.run([str(exe), "-i", str(source), "-o", str(target), "-n", "digital-art-4x",
-                            "-m", str(exe.parent / "models")], check=True, capture_output=True)
+                            "-m", str(exe.parent / "models"), "-t", "64", "-j", "1:1:1"],
+                           check=True, capture_output=True)
             image = Image.open(target).convert("RGB")
     height = round(image.height * WIDTH / image.width)
     return image.resize((WIDTH, height), Image.LANCZOS)
@@ -79,6 +87,26 @@ def percentile(gray, share):
         if seen >= limit:
             return value / 255
     return 1
+
+
+def fingerprint(image):
+    """Difference hash: 256 bits that barely change for near-identical pictures."""
+    pixels = list(image.convert("L").resize((17, 16)).get_flattened_data())
+    return sum(1 << i for i in range(256) if pixels[i // 16 * 17 + i % 16] > pixels[i // 16 * 17 + i % 16 + 1])
+
+
+def soft_warnings(image):
+    """Hints, not failures: flat or soft pictures. Thresholds measured on the
+    first 107 sets, where the median contrast was 24."""
+    gray = image.convert("L").resize((960, round(image.height * 960 / image.width)))
+    contrast = ImageStat.Stat(gray).stddev[0]
+    detail = ImageStat.Stat(gray.filter(ImageFilter.FIND_EDGES)).mean[0]
+    hints = []
+    if contrast < 13:
+        hints.append(f"low contrast ({contrast:.0f})")
+    if detail < 3.5:
+        hints.append(f"little detail ({detail:.1f})")
+    return hints
 
 
 def check_image(image, light):
@@ -142,7 +170,8 @@ def main():
     out = ROOT / "out" / args.batch
     out.mkdir(parents=True, exist_ok=True)
     (ROOT / "previews").mkdir(exist_ok=True)
-    added, failed = [], 0
+    added, failed, warned = [], 0, 0
+    hashes = {e["id"]: fingerprint(Image.open(ROOT / e["preview"])) for e in index if (ROOT / e["preview"]).is_file()}
 
     for meta_path in sorted(args.input.glob("*.json")):
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
@@ -163,12 +192,25 @@ def main():
                 failed += 1
                 continue
         set_id = meta["id"]
+        mark = fingerprint(image)
+        twin = next((other for other, h in hashes.items() if bin(mark ^ h).count("1") <= 20), None)
+        if twin:
+            print(f"FAIL {set_id}: nearly identical to {twin}")
+            failed += 1
+            continue
+        hints = soft_warnings(image)
+        if hints:
+            print(f"HINT {set_id}: " + "; ".join(hints))
+            warned += 1
+        hashes[set_id] = mark
         image.crop((0, 0, WIDTH, HEADER_HEIGHT)).save(out / f"{set_id}-header.jpg", quality=90)
         image.crop((0, HEADER_HEIGHT, WIDTH, image.height)).save(out / f"{set_id}-wallpaper.jpg", quality=90)
         image.resize((480, round(image.height * 480 / WIDTH)), Image.LANCZOS).save(
             ROOT / "previews" / f"{set_id}.jpg", quality=80)
         tags = sorted(set(meta["tags"]) | {"light" if light else "dark"})
-        index.append({"schema": 1, "id": set_id, "title": meta["title"], "release": args.batch,
+        style = next(t for t in meta["tags"] if t in GROUPS["style"])
+        index.append({"schema": 1, "id": set_id, "title": meta["title"], "category": meta["category"],
+                      "style": style, "release": args.batch,
                       "tags": tags, "colors": meta["colors"], "preview": f"previews/{set_id}.jpg"})
         known.add(set_id)
         added.append(set_id)
@@ -177,7 +219,7 @@ def main():
     index.sort(key=lambda entry: entry["id"])
     index_path.write_text(json.dumps(index, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     write_readme(index)
-    print(f"{len(added)} added, {failed} failed")
+    print(f"{len(added)} added, {failed} failed, {warned} with hints")
 
     if args.upload and added:
         files = [str(out / f"{i}-{part}.jpg") for i in added for part in ("header", "wallpaper")]
