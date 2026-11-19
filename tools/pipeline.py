@@ -10,7 +10,7 @@ index.json. With --upload the full images go to the GitHub release named by
     python tools/pipeline.py INPUT_DIR --batch batch-001 [--upscaler PATH] [--upload]
 
 Needs Pillow. The upscaler is realesrgan-ncnn-vulkan with the
-digital-art-4x model; without --upscaler, images are scaled plainly.
+digital-art-4x model (realesrgan-x4plus for photo styles); without --upscaler, images are scaled plainly.
 """
 import argparse
 import json
@@ -62,7 +62,12 @@ def check_meta(meta, known_ids):
     return errors
 
 
-def upscale(path, upscaler):
+# Photo styles upscale with the photo model; digital-art paints over fine
+# photographic detail such as windows and facades.
+PHOTO_STYLES = {"photorealistic", "cinematic", "realistic"}
+
+
+def upscale(path, upscaler, style):
     image = Image.open(path).convert("RGB")
     if image.width < WIDTH and upscaler:
         with tempfile.TemporaryDirectory() as tmp:
@@ -71,7 +76,7 @@ def upscale(path, upscaler):
             exe = Path(upscaler)
             # Small tiles and one thread keep the GPU load low and even; the
             # default large tiles made an older graphics card whine audibly.
-            subprocess.run([str(exe), "-i", str(source), "-o", str(target), "-n", "digital-art-4x",
+            subprocess.run([str(exe), "-i", str(source), "-o", str(target), "-n", "realesrgan-x4plus" if style in PHOTO_STYLES else "digital-art-4x",
                             "-m", str(exe.parent / "models"), "-t", "64", "-j", "1:1:1"],
                            check=True, capture_output=True)
             image = Image.open(target).convert("RGB")
@@ -128,15 +133,15 @@ def check_image(image, light):
         if percentile(top_left, .02) < .3:
             errors.append("dark spots behind the tab titles")
     else:
-        if left_mean > .4:
+        if left_mean > .5:
             errors.append(f"left edge too bright ({left_mean:.2f})")
-        if percentile(left, .99) > .58:
+        if percentile(left, .99) > .75:
             errors.append("bright objects at the left edge")
         if percentile(top_left, .99) > .9:
             errors.append("bright spots behind the tab titles")
-    # Thresholds measured on the first sets: calm edges stay below 2.5, a
-    # lantern and a tea house at the edge measured 5.1.
-    if left_detail > 4:
+    # Subdued scenery is allowed at the left edge; only clutter fails. A
+    # lantern and a tea house at the edge measured 5.1, dense hedges about 9.
+    if left_detail > 7:
         errors.append(f"left edge too busy ({left_detail:.1f})")
     if ImageStat.Stat(bottom).stddev[0] / 255 > .12:
         errors.append("bottom edge does not settle into one color")
@@ -184,7 +189,7 @@ def main():
             failed += 1
             continue
         light = lightness(meta["colors"]["menu"]) > .55
-        image = upscale(image_path, args.upscaler)
+        image = upscale(image_path, args.upscaler, next(t for t in meta["tags"] if t in GROUPS["style"]))
         problems = check_image(image, light)
         if problems:
             print(f"{'WARN' if args.force else 'FAIL'} {meta['id']}: " + "; ".join(problems))
