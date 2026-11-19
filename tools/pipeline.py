@@ -148,15 +148,20 @@ def check_image(image, light):
     return errors
 
 
+README_SETS = 30
+
+
 def write_readme(index):
-    """Rebuild the preview grid between the markers in README.md."""
+    """Rebuild the preview grid between the markers in README.md: the newest
+    sets only, so the page stays fast as the gallery grows."""
     path = ROOT / "README.md"
     text = path.read_text(encoding="utf-8")
     start, end = "<!-- sets:start -->", "<!-- sets:end -->"
     cells = [f'<a href="{e["preview"]}"><img src="{e["preview"]}" width="260" alt="{e["title"]}"></a><br>'
-             f'<b>{e["title"]}</b><br><code>{e["id"]}</code>' for e in index]
+             f'<b>{e["title"]}</b><br><code>{e["id"]}</code>' for e in index[::-1][:README_SETS]]
     rows = ["<tr>" + "".join(f"<td>{c}</td>" for c in cells[i:i + 3]) + "</tr>" for i in range(0, len(cells), 3)]
-    grid = "\n".join([start, "<table>", *rows, "</table>", "", f"{len(index)} sets.", end])
+    grid = "\n".join([start, "<table>", *rows, "</table>", "", f"{len(index)} sets; the newest {min(len(index), README_SETS)} are shown. "
+                      "Browse all of them in the add-on or in [index.json](index.json).", end])
     path.write_text(text[:text.index(start)] + grid + text[text.index(end) + len(end):], encoding="utf-8")
 
 

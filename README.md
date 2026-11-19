@@ -33,11 +33,11 @@ and three matching colors tint menus, the address bar and the selected tab.
 
 <!-- sets:start -->
 <table>
-<tr><td><a href="previews/caravan-under-the-milky-way.jpg"><img src="previews/caravan-under-the-milky-way.jpg" width="260" alt="Caravan Under the Milky Way"></a><br><b>Caravan Under the Milky Way</b><br><code>caravan-under-the-milky-way</code></td><td><a href="previews/dj-on-a-tropical-beach.jpg"><img src="previews/dj-on-a-tropical-beach.jpg" width="260" alt="DJ on a Tropical Beach"></a><br><b>DJ on a Tropical Beach</b><br><code>dj-on-a-tropical-beach</code></td><td><a href="previews/manta-in-sunlight.jpg"><img src="previews/manta-in-sunlight.jpg" width="260" alt="Manta in Sunlight"></a><br><b>Manta in Sunlight</b><br><code>manta-in-sunlight</code></td></tr>
-<tr><td><a href="previews/pine-forest-in-morning-fog.jpg"><img src="previews/pine-forest-in-morning-fog.jpg" width="260" alt="Pine Forest in Morning Fog"></a><br><b>Pine Forest in Morning Fog</b><br><code>pine-forest-in-morning-fog</code></td><td><a href="previews/storm-over-the-sea.jpg"><img src="previews/storm-over-the-sea.jpg" width="260" alt="Storm Over the Sea"></a><br><b>Storm Over the Sea</b><br><code>storm-over-the-sea</code></td></tr>
+<tr><td><a href="previews/storm-over-the-sea.jpg"><img src="previews/storm-over-the-sea.jpg" width="260" alt="Storm Over the Sea"></a><br><b>Storm Over the Sea</b><br><code>storm-over-the-sea</code></td><td><a href="previews/pine-forest-in-morning-fog.jpg"><img src="previews/pine-forest-in-morning-fog.jpg" width="260" alt="Pine Forest in Morning Fog"></a><br><b>Pine Forest in Morning Fog</b><br><code>pine-forest-in-morning-fog</code></td><td><a href="previews/manta-in-sunlight.jpg"><img src="previews/manta-in-sunlight.jpg" width="260" alt="Manta in Sunlight"></a><br><b>Manta in Sunlight</b><br><code>manta-in-sunlight</code></td></tr>
+<tr><td><a href="previews/dj-on-a-tropical-beach.jpg"><img src="previews/dj-on-a-tropical-beach.jpg" width="260" alt="DJ on a Tropical Beach"></a><br><b>DJ on a Tropical Beach</b><br><code>dj-on-a-tropical-beach</code></td><td><a href="previews/caravan-under-the-milky-way.jpg"><img src="previews/caravan-under-the-milky-way.jpg" width="260" alt="Caravan Under the Milky Way"></a><br><b>Caravan Under the Milky Way</b><br><code>caravan-under-the-milky-way</code></td></tr>
 </table>
 
-5 sets.
+5 sets; the newest 5 are shown. Browse all of them in the add-on or in [index.json](index.json).
 <!-- sets:end -->
 
 ## ⚙️ Configuration
