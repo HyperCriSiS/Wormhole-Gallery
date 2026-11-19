@@ -1,6 +1,6 @@
 {
   "subject": ["space", "galaxy", "nebula", "planet", "sky", "aurora", "ocean", "beach", "coast", "underwater", "lake", "river", "waterfall", "island", "mountains", "forest", "jungle", "desert", "canyon", "volcano", "snow", "ice", "meadow", "garden", "flowers", "countryside", "city", "skyline", "street", "village", "castle", "temple", "ruins", "bridge", "lighthouse", "cabin", "library", "spaceship", "station", "megastructure", "train", "ship", "airship", "animals", "cat", "fox", "wolf", "deer", "bird", "fish", "whale", "dragon", "creature", "abstract", "texture", "gradient", "geometric", "fractal", "kaleidoscope", "mushroom", "portal"],
-  "genre": ["nature", "fantasy", "surreal", "sci-fi", "cyberpunk", "post-apocalyptic", "synthwave", "steampunk", "gothic", "cozy", "dark-academia", "japan", "minimal", "y2k", "psychedelic"],
+  "genre": ["nature", "fantasy", "surreal", "sci-fi", "cyberpunk", "post-apocalyptic", "synthwave", "steampunk", "gothic", "cozy", "dark-academia", "japan", "minimal", "y2k", "psychedelic", "horror"],
   "time": ["dawn", "day", "golden-hour", "sunset", "dusk", "night"],
   "weather": ["clear", "clouds", "storm", "rain", "fog", "snowfall"],
   "season": ["spring", "summer", "autumn", "winter"],
@@ -8,5 +8,5 @@
   "color": ["blue", "teal", "cyan", "green", "yellow", "gold", "orange", "red", "pink", "purple", "violet", "brown", "gray", "monochrome", "warm", "cool"],
   "style": ["photorealistic", "cinematic", "painterly", "concept-art", "oil-painting", "watercolor", "anime", "woodblock", "low-poly", "pixel-art", "flat", "neon", "retro", "realistic"],
   "brightness": ["dark", "light"],
-  "category": ["landscapes", "sci-fi", "fantasy", "space", "cities", "illustrated", "cozy", "abstract", "animals", "vehicles", "psychedelic"]
+  "category": ["landscapes", "sci-fi", "fantasy", "space", "cities", "illustrated", "cozy", "abstract", "animals", "vehicles", "psychedelic", "horror"]
 }
