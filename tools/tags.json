@@ -8,5 +8,5 @@
   "color": ["blue", "teal", "cyan", "green", "yellow", "gold", "orange", "red", "pink", "purple", "violet", "brown", "gray", "monochrome", "warm", "cool"],
   "style": ["photorealistic", "cinematic", "painterly", "concept-art", "oil-painting", "watercolor", "anime", "woodblock", "low-poly", "pixel-art", "flat", "neon", "retro", "realistic"],
   "brightness": ["dark", "light"],
-  "category": ["landscapes", "sci-fi", "fantasy", "space", "cities", "illustrated", "cozy", "abstract", "animals", "vehicles", "psychedelic", "horror"]
+  "category": ["landscapes", "sci-fi", "fantasy", "space", "cities", "illustrated", "cozy", "abstract", "animals", "vehicles", "psychedelic", "horror", "wormhole"]
 }
